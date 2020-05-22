@@ -1,10 +1,65 @@
 const webpack = require("webpack");
 const path = require('path');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserJSPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  entry: './src/js/index.js',
+  mode: "development",
+  entry: "./src/js/index.js",
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
-  }
+    path: path.resolve(__dirname, "./dist"),
+    filename: "main.js",
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        options: {
+          presets: [
+            [
+              "@babel/preset-env",
+              {
+                modules: false,
+              },
+            ],
+          ],
+        },
+      },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      },
+      {
+        test: /\.pug/,
+        use: [
+          {
+            loader: "html-loader",
+          },
+          {
+            loader: "pug-html-loader",
+          },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: "style.css",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+    }),
+  ],
+  optimization: {
+    minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsPlugin({})],
+  },
 };
