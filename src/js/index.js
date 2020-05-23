@@ -1,3 +1,6 @@
-import myname from "./modules/myname";
+import "../scss/style.scss";
 
-myname();
+import test from './test';
+import myname from "./modules/myname";
+console.log(test(3, 9));
+console.log(myname("長谷川"));

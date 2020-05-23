@@ -2,14 +2,13 @@ const webpack = require("webpack");
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {
-  CleanWebpackPlugin
-} = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
 
 module.exports = {
-  mode: "development",
+  devtool: "source-map",
+  // mode: "development",
   entry: "./src/js/index.js",
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -17,6 +16,13 @@ module.exports = {
   },
   module: {
     rules: [{
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: [{
+          loader: 'ts-loader',
+        }, ],
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: "babel-loader",
@@ -32,8 +38,20 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        test: /\.(css|sass|scss)$/,
+        use: [{
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: false,
+            },
+          },
+          {
+            loader: "sass-loader",
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg)/,
@@ -90,5 +108,8 @@ module.exports = {
   ],
   optimization: {
     minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsPlugin({})],
+  },
+  resolve: {
+    extensions: ['.js', '.ts']
   },
 };
