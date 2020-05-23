@@ -36,20 +36,25 @@ module.exports = {
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpg)/,
+        test: /\.(png|jpg|jpeg)/,
         use: [{
-          loader: "file-loader",
-          options: {
-            name: "images/[name].[ext]",
-            esModule: false,
+            loader: "file-loader",
+            options: {
+              name: "images/[name].[ext]",
+              esModule: false,
+            },
           },
-        }, ],
+          {
+            loader: "image-webpack-loader",
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65,
+              },
+            },
+          },
+        ],
       },
-      // {
-      //   test: /\.js$/,
-      //   exclude: /node_modules/,
-      //   loader: "babel-loader",
-      // },
       {
         test: /\.pug/,
         use: [{
@@ -57,6 +62,9 @@ module.exports = {
           },
           {
             loader: "pug-html-loader",
+            options: {
+              pretty: true,
+            },
           },
         ],
       },
@@ -67,7 +75,7 @@ module.exports = {
       filename: "style.css",
     }),
     new HtmlWebpackPlugin({
-      template: "./src/templates/index.html",
+      template: "./src/templates/index.pug",
     }),
     new CleanWebpackPlugin(),
   ],
