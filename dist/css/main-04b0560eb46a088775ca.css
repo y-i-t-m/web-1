@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  background-color: #ddd;
+  padding: 0;
+  text-align: center;
+}
+
+.gnav__list {
+  display: -ms-grid;
+  display: grid;
+}
+
+
+/*# sourceMappingURL=main-04b0560eb46a088775ca.css.map*/
