@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserJSPlugin = require("terser-webpack-plugin");
+const StylelintPlugin = require("stylelint-webpack-plugin");
 
 module.exports = {
   devtool: "source-map",
@@ -15,12 +16,15 @@ module.exports = {
     filename: "js/[name]-[hash].js",
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: [{
-          loader: 'ts-loader',
-        }, ],
+        use: [
+          {
+            loader: "ts-loader",
+          },
+        ],
       },
       {
         test: /\.js$/,
@@ -39,7 +43,8 @@ module.exports = {
       },
       {
         test: /\.(css|sass|scss)$/,
-        use: [{
+        use: [
+          {
             loader: MiniCssExtractPlugin.loader,
           },
           {
@@ -49,13 +54,43 @@ module.exports = {
             },
           },
           {
+            loader: "postcss-loader",
+            options: {
+              plugins: [
+                require("autoprefixer")({
+                  grid: true,
+                }),
+                require("css-declaration-sorter")({
+                  order: "concentric-css", // ボックスモデルの外から内へのソート
+                }),
+                require("postcss-sort-media-queries")({
+                  sort: "mobile-first", // モバイルファースト時はこっち
+                }),
+                // require("postcss-sort-media-queries")({
+                //   sort: "desktop-first", // PCファースト時はこっち
+                // }),
+              ],
+            },
+          },
+          {
             loader: "sass-loader",
+            options: {
+              data: "@import 'global-imports.scss';",
+              includePaths: [path.resolve(__dirname, 'src/scss/')],
+              sassOptions: {
+                outputStyle: "expanded",
+              },
+            },
+          },
+          {
+            loader: "import-glob-loader",
           },
         ],
       },
       {
         test: /\.(png|jpg|jpeg)/,
-        use: [{
+        use: [
+          {
             loader: "file-loader",
             options: {
               name: "images/[name]-[hash].[ext]",
@@ -75,7 +110,8 @@ module.exports = {
       },
       {
         test: /\.pug/,
-        use: [{
+        use: [
+          {
             loader: "html-loader",
           },
           {
@@ -92,6 +128,9 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "./css/[name]-[hash].css",
     }),
+    new StylelintPlugin({
+      fix: true,
+    }),
     new HtmlWebpackPlugin({
       template: "./src/templates/index.pug",
       filename: "index.html",
@@ -99,6 +138,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/templates/access.pug",
       filename: "access.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/templates/recruit.pug",
+      filename: "recruit.html",
     }),
     new HtmlWebpackPlugin({
       template: "./src/templates/members/taro.pug",
@@ -110,6 +153,6 @@ module.exports = {
     minimizer: [new TerserJSPlugin({}), new OptimizeCssAssetsPlugin({})],
   },
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: [".js", ".ts"],
   },
 };

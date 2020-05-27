@@ -1,3 +1,16 @@
 body {
-  background-color: red;
+  text-align: center;
+  background-color: #ddd;
+  padding: 0;
+  margin: 0;
 }
+
+.gnav__list {
+  display: grid;
+}
+
+@import "reset";
+
+@import "layout/**/*";
+
+@import "object/**/*";
