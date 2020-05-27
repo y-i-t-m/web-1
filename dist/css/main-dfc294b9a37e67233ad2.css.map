@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/scss/style.scss"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;;AAEA;AACA;AACA;AACA","file":"./css/main-dfc294b9a37e67233ad2.css","sourcesContent":["body {\n  margin: 0;\n  background-color: #ddd;\n  padding: 0;\n  text-align: center;\n}\n\n.gnav__list {\n  display: -ms-grid;\n  display: grid;\n}\n"],"sourceRoot":""}
