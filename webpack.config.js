@@ -75,9 +75,9 @@ module.exports = {
           {
             loader: "sass-loader",
             options: {
-              // data: "@import 'global-imports.scss';",
-              // includePaths: [path.resolve(__dirname, 'src/scss/')],
               sassOptions: {
+                data: "@import 'global-imports.scss';",
+                includePaths: [path.resolve(__dirname, 'src/scss/')],
                 outputStyle: "expanded",
               },
             },

@@ -1,16 +1,5 @@
-body {
-  text-align: center;
-  background-color: #ddd;
-  padding: 0;
-  margin: 0;
-}
+@import "reset";
 
-.gnav__list {
-  display: grid;
-}
+@import "layout/**/*";
 
-// @import "reset";
-
-// @import "layout/**/*";
-
-// @import "object/**/*";
+@import "object/**/**/*";
