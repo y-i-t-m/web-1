@@ -4,6 +4,20 @@ block locals
   - var title = "採用情報 | 株式会社hogehoge";
   - var description = "株式会社hogeの採用情報ページです。";
 
-
 block content
-  h1 採用情報
+  main.l-main
+    .l-hero
+      .l-hero__inner
+        h2.l-hero__title 採用情報
+        .l-hero__img
+          img(src="../images/header2.jpg")
+    ul.tablist(role="tablist")
+      li.tablist__item(role="presentation"): a.tablist__link(href="#sales" role="tab" aria-controls="panel1" aria-selected="true") 営業
+      li.tablist__item(role="presentation"): a.tablist__link(href="#designer" role="tab" aria-controls="panel2") デザイナー
+      li.tablist__item(role="presentation"): a.tablist__link(href="#front" role="tab" aria-controls="panel3") フロントエンド
+    section#sales.l-section-tabpanel(role="tabpanel" aria-hidden="false")
+      p 営業職を募集しています
+    section#designer.l-section-tabpanel(role="tabpanel" aria-hidden="true")
+      p 営業職を募集しています
+    section#front.l-section-tabpanel(role="tabpanel" aria-hidden="true")
+      p 営業職を募集しています
