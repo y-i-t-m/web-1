@@ -1,6 +1,18 @@
 .c-gnav {
+  max-width: 100%;
+  flex: 100%;
 
   &__list {
-    display: grid;
+    text-align: right;
+  }
+
+  &__item {
+    display: inline-block;
+  }
+
+  &__link {
+    display: block;
+    padding: 20px;
+    overflow: hidden;
   }
 }

@@ -1,0 +1,22 @@
+.c-langnav {
+  max-width: 70%;
+  flex: 70%;
+
+  &__list {
+    padding-right: 10px;
+    text-align: right;
+  }
+
+  &__item {
+    display: inline-block;
+
+    &:not(:last-child) {
+      border-right: 1px solid #333;
+    }
+  }
+
+  &__link {
+    display: block;
+    padding: 0 10px;
+  }
+}

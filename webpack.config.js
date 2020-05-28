@@ -136,16 +136,32 @@ module.exports = {
       filename: "index.html",
     }),
     new HtmlWebpackPlugin({
+      template: "./src/templates/business.pug",
+      filename: "business.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/templates/intro.pug",
+      filename: "intro.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/templates/company.pug",
+      filename: "company.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/templates/news.pug",
+      filename: "news.html",
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/templates/contact.pug",
+      filename: "contact.html",
+    }),
+    new HtmlWebpackPlugin({
       template: "./src/templates/access.pug",
       filename: "access.html",
     }),
     new HtmlWebpackPlugin({
       template: "./src/templates/recruit.pug",
       filename: "recruit.html",
-    }),
-    new HtmlWebpackPlugin({
-      template: "./src/templates/members/taro.pug",
-      filename: "members/taro.html",
     }),
     new CleanWebpackPlugin(),
   ],

@@ -1,0 +1,24 @@
+.l-hero {
+  &__inner {
+    position: relative;
+  }
+
+  &__txt {
+    position: absolute;
+    max-width: 450px;
+    top: 250px;
+    left: 200px;
+    z-index: 2;
+
+    p {
+      font-size: rem(40);
+    }
+  }
+
+  &__img {
+    position: absolute;
+    right: 0;
+    width: 70%;
+    z-index: 1;
+  }
+}

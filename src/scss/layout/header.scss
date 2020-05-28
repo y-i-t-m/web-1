@@ -1,0 +1,14 @@
+.l-header {
+  &__inner {
+    padding: 50px 30px 15px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__logo {
+    padding-left: 20px;
+    font-size: rem(30);
+    max-width: 30%;
+    flex: 30%;
+  }
+}
