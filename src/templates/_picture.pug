@@ -1,0 +1,10 @@
+//-
+ pictureタグのmixin
+ @param name 画像ファイル名
+ @param exp 拡張子
+ @param alt ALTテキスト
+mixin picture(name, exp, alt)
+  picture
+    source(media="(max-width: 767px)" srcset=`/images/${name}-sp.${exp} 1x, /images/${name}@2x.${exp} 2x`)
+    source(media="(min-width: 768px)" srcset=`/images/${name}.${exp} 1x, /images/${name}@2x.${exp} 2x`)
+    img(src=`/images/${name}.${exp}` alt=`${alt}`)
